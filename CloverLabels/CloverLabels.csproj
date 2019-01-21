@@ -52,10 +52,11 @@
     <ApplicationIcon>printlabel.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>E08C8BC12CF7DEC646CDEDDE401AE3BF28F44328</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>942CED33266D117D0B5C0B5D1B459342CD6B3FBB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>CloverLabels_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -137,12 +138,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewLabel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewLabel.Designer.cs">
-      <DependentUpon>ViewLabel.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Etiquetas\lblReciboArt2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>lblReciboArt2.cs</LastGenOutput>
@@ -175,9 +170,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ViewLabel.resx">
-      <DependentUpon>ViewLabel.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="CloverLabels_TemporaryKey.pfx" />
     <None Include="dtsDataFields.xsc">
       <DependentUpon>dtsDataFields.xsd</DependentUpon>
