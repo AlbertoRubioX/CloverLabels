@@ -181,7 +181,7 @@ namespace CloverLabels
                 r["DataColumn3"] = _asFecha;
                 r["DataColumn4"] = _asArt.ToUpper();
                 r["DataColumn5"] = _asDescrip;
-                r["DataColumn6"] = _adCant.ToString();
+                r["DataColumn6"] = _adCant.ToString("N0");
                 r["DataColumn7"] = _asUM.ToString();
                 r["DataColumn8"] = _asUsuario.ToString();
 
@@ -220,6 +220,8 @@ namespace CloverLabels
                 //{
 
                 rptAgenda.PrintOptions.PrinterName = _lsPrinter;
+                rptAgenda.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+                rptAgenda.PrintOptions.PaperSource = PaperSource.Auto;
                 rptAgenda.PrintToPrinter(1, true,1,1);
                 Cursor = Cursors.Arrow;
                 bPrint = true;
@@ -260,7 +262,7 @@ namespace CloverLabels
 
                 r["DataColumn4"] = cbbbArticulo.Text.ToString().ToUpper();
                 r["DataColumn5"] = txtDesc.Text.ToString().ToUpper();
-                r["DataColumn6"] = txtCant.Text.ToString();
+                r["DataColumn6"] = Double.Parse(txtCant.Text).ToString("N0");
                 r["DataColumn7"] = txtUM.Text.ToString();
 
                 if (_lsCodBar2 == "1")
@@ -287,7 +289,8 @@ namespace CloverLabels
                 rptAgenda.SetDataSource(t);
 
                 rptAgenda.PrintOptions.PrinterName = _lsPrinter;
-                rptAgenda.PrintToPrinter(iCopy, true, 1, 1);
+                //rptAgenda.PrintOptions.PaperOrientation= PaperOrientation.Landscape;
+                rptAgenda.PrintToPrinter(iCopy, true, 0, 0);
                 Cursor = Cursors.Arrow;
                 bPrint = true;
                 
@@ -656,5 +659,7 @@ namespace CloverLabels
                 return;
             }
         }
+
+       
     }
 }
