@@ -84,7 +84,13 @@ namespace CloverLabels
                 else
                     Close();
             }
-            catch(Exception ex)
+            catch(FileNotFoundException ex)
+            {
+                this.Close();
+            }catch(TypeInitializationException ex){
+                this.Close();
+            }
+            catch (Exception ex)
             {
                 ex.ToString();
                 throw;
@@ -208,6 +214,9 @@ namespace CloverLabels
                 t.Rows.Add(r);
 
                 ReportDocument rptAgenda = new ReportDocument();
+                //throw new TypeInitializationException("Error",new Exception());
+                //throw new FileNotFoundException("Error");
+
 
                 string sDir = _lsPath;
                 string sArchivo = sDir + @"\" + _lsRecPath;
@@ -218,13 +227,22 @@ namespace CloverLabels
                 //DialogResult result = dialog.ShowDialog();
                 //if (result == DialogResult.OK)
                 //{
-
                 rptAgenda.PrintOptions.PrinterName = _lsPrinter;
-                rptAgenda.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+                //rptAgenda.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
                 rptAgenda.PrintOptions.PaperSource = PaperSource.Auto;
                 rptAgenda.PrintToPrinter(1, true,1,1);
                 Cursor = Cursors.Arrow;
                 bPrint = true;
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Favor de notificar al administrador del sistema, se cerrará el programa: " + ex, "Error al cargar",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                this.Close();
+            }
+            catch (TypeInitializationException ex)
+            {
+                MessageBox.Show("Favor de notificar al administrador del sistema, se cerrará el programa: " + ex, "Error al cargar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -287,7 +305,6 @@ namespace CloverLabels
                 string sArchivo = _lsPath + @"\" + _lsArtPath;
                 rptAgenda.Load(sArchivo);
                 rptAgenda.SetDataSource(t);
-
                 rptAgenda.PrintOptions.PrinterName = _lsPrinter;
                 //rptAgenda.PrintOptions.PaperOrientation= PaperOrientation.Landscape;
                 rptAgenda.PrintToPrinter(iCopy, true, 0, 0);
@@ -297,6 +314,16 @@ namespace CloverLabels
                 
                 
                 
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Favor de notificar al administrador del sistema, se cerrará el programa: " + ex, "Error al cargar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
+            }
+            catch (TypeInitializationException ex)
+            {
+                MessageBox.Show("Favor de notificar al administrador del sistema, se cerrará el programa: " + ex, "Error al cargar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -328,7 +355,7 @@ namespace CloverLabels
                     string sUsuario = datos.Rows[0]["recibio"].ToString();
 
                     bPrint = GeneraEtiqueta(_asRecibo, sOrden, sFecha, sArticulo, sDescrip, dCant, sUM, sUsuario);
-                    
+
                 }
             }
             catch (Exception ex)
